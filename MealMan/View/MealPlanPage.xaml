@@ -1,0 +1,88 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MealMan.ViewModel"
+             x:Class="MealMan.View.MealPlanPage"
+             BackgroundColor="{AppThemeBinding Light=#F4F4F4, Dark=#121212}">
+
+    <ContentPage.BindingContext>
+        <vm:MealPlanViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- App Title and Daily Goal -->
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Meal Plan"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#1E1E1E, Dark=#00FFB2}"
+                       HorizontalOptions="Center"/>
+                <Label Text="Dashboard"
+                       FontSize="18"
+                       TextColor="{AppThemeBinding Light=#4F4F4F, Dark=#E0E0E0}"
+                       HorizontalOptions="Start" Margin="0,20,0,0"/>
+            </VerticalStackLayout>
+
+            <!-- Dashboard Section -->
+            <Frame BorderColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}" 
+                   BackgroundColor="{AppThemeBinding Light=#EAEAEA, Dark=#1E1E1E}" 
+                   CornerRadius="12" 
+                   Padding="15" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10" HorizontalOptions="FillAndExpand">
+                    <Label Text="Meal Plan Entries"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}"
+                           HorizontalOptions="Center"/>
+
+                    <!-- Meal Plan Count -->
+                    <Label Text="{Binding MealPlanCount, StringFormat='{0} Available Meal Plans'}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Meal List Section -->
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Meals For Today"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                <CollectionView ItemsSource="{Binding TodaysMeals}"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedMeal, Mode=TwoWay}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="{AppThemeBinding Light=#C8C8C8, Dark=#383838}" 
+                                    Background="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" 
+                                    StrokeShape="RoundRectangle 12" 
+                                    Padding="10">
+                                <VerticalStackLayout>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding MealType}"
+                                               FontSize="18"
+                                               TextColor="{AppThemeBinding Light=#1E1E1E, Dark=#FFFFFF}"/>
+                                        <Label Text="{Binding Food}"
+                                               FontSize="18"
+                                               TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"
+                                               HorizontalOptions="EndAndExpand"/>
+                                    </HorizontalStackLayout>
+                                    <Label Text="{Binding Calories, StringFormat='{0} Calories'}"
+                                           FontSize="16"
+                                           TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}"/>
+                                    <Label Text="{Binding Day}"
+                                           FontSize="14"
+                                           TextColor="{AppThemeBinding Light=#7D7D7D, Dark=#AAAAAA}"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,16 @@
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:MealMan.View"
+       x:Class="MealMan.AppShell"
+>
+
+    <TabBar>
+        <Tab Title="Meal">
+            <ShellContent ContentTemplate="{DataTemplate views:MealPlanPage}" />
+        </Tab>
+        <Tab Title="Daily">
+            <ShellContent ContentTemplate="{DataTemplate views:DailyMeal}" />
+        </Tab>
+    </TabBar>
+        
+</Shell>

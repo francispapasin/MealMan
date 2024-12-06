@@ -1,0 +1,249 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MealMan.ViewModel"
+             x:Class="MealMan.View.DailyMeal"
+             BackgroundColor="{AppThemeBinding Light=#F4F4F4, Dark=#121212}">
+
+    <ContentPage.BindingContext>
+        <vm:MealPlanViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
+
+            <!-- Header -->
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Daily Meal Plan"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#1E1E1E, Dark=#00FFB2}"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+            <HorizontalStackLayout Spacing="5" HorizontalOptions="End">
+                <Button Text="Add Meal" 
+        BackgroundColor="{AppThemeBinding Light=#00A28E, Dark=#00574B}"
+        TextColor="{AppThemeBinding Light=#FFFFFF, Dark=#FFFFFF}"
+        CornerRadius="12"
+        Clicked="Button_Clicked_1"/>
+                <Button Text="Update Meal" 
+            BackgroundColor="{AppThemeBinding Light=#00A28E, Dark=#00574B}"
+            TextColor="{AppThemeBinding Light=#FFFFFF, Dark=#FFFFFF}"
+            CornerRadius="12"
+ Clicked="Button_Clicked"/>
+
+            </HorizontalStackLayout>
+            <!-- Weekly Meals -->
+            <Label Text="Monday" FontAttributes="Bold" FontSize="20" 
+                   TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+            <!-- Total Calories -->
+            
+            <CollectionView ItemsSource="{Binding MondayMeals}" SelectionMode="Single"
+SelectedItem="{Binding SelectedMeal, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <!-- Swipe Items -->
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Update"
+                                   BackgroundColor="{AppThemeBinding Light=#00A28E, Dark=#00574B}"
+                                   Clicked="SwipeItem_Clicked" />
+                                    <SwipeItem Text="Delete"
+                                   BackgroundColor="{AppThemeBinding Light=#D84343, Dark=#B71C1C}"
+                                   Command="{Binding DeleteMealCommand}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" 
+        Stroke="{AppThemeBinding Light=#C8C8C8, Dark=#383838}" 
+        StrokeShape="RoundRectangle 12">
+                                <VerticalStackLayout Padding="10">
+                                    <Label Text="{Binding MealType}"
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}"/>
+                                    <Label Text="{Binding Food}" 
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                                    <Label Text="{Binding Calories, StringFormat='{0} Calories'}" 
+               TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding MondayCalories, StringFormat='Total: {0} Calories'}" 
+FontAttributes="Bold"
+FontSize="16" 
+TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}" />
+            <!-- Repeat for other days -->
+            <Label Text="Tuesday" FontAttributes="Bold" FontSize="20" 
+                   TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+            <CollectionView ItemsSource="{Binding TuesdayMeals}" SelectionMode="Single"
+SelectedItem="{Binding SelectedMeal, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" 
+        Stroke="{AppThemeBinding Light=#C8C8C8, Dark=#383838}" 
+        StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout Padding="10">
+                                <Label Text="{Binding MealType}"
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}"/>
+                                <Label Text="{Binding Food}" 
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                                <Label Text="{Binding Calories, StringFormat='{0} Calories'}" 
+               TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding TuesdayCalories, StringFormat='Total: {0} Calories'}" 
+FontAttributes="Bold"
+FontSize="16" 
+TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}" />
+            <Label Text="Wednesday" FontAttributes="Bold" FontSize="20" 
+       TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+            <CollectionView ItemsSource="{Binding WednesdayMeals}" SelectionMode="Single"
+SelectedItem="{Binding SelectedMeal, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" 
+        Stroke="{AppThemeBinding Light=#C8C8C8, Dark=#383838}" 
+        StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout Padding="10">
+                                <Label Text="{Binding MealType}"
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}"/>
+                                <Label Text="{Binding Food}" 
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                                <Label Text="{Binding Calories, StringFormat='{0} Calories'}" 
+               TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding WednesdayCalories, StringFormat='Total: {0} Calories'}" 
+FontAttributes="Bold"
+FontSize="16" 
+TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}" />
+            <Label Text="Thursday" FontAttributes="Bold" FontSize="20" 
+TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+            <CollectionView ItemsSource="{Binding ThursdayMeals}" SelectionMode="Single"
+SelectedItem="{Binding SelectedMeal, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" 
+        Stroke="{AppThemeBinding Light=#C8C8C8, Dark=#383838}" 
+        StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout Padding="10">
+                                <Label Text="{Binding MealType}"
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}"/>
+                                <Label Text="{Binding Food}" 
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                                <Label Text="{Binding Calories, StringFormat='{0} Calories'}" 
+               TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding ThursdayCalories, StringFormat='Total: {0} Calories'}" 
+FontAttributes="Bold"
+FontSize="16" 
+TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}" />
+            <Label Text="Friday" FontAttributes="Bold" FontSize="20" 
+TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+            <CollectionView ItemsSource="{Binding FridayMeals}" SelectionMode="Single"
+SelectedItem="{Binding SelectedMeal, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" 
+        Stroke="{AppThemeBinding Light=#C8C8C8, Dark=#383838}" 
+        StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout Padding="10">
+                                <Label Text="{Binding MealType}"
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}"/>
+                                <Label Text="{Binding Food}" 
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                                <Label Text="{Binding Calories, StringFormat='{0} Calories'}" 
+               TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding FridayCalories, StringFormat='Total: {0} Calories'}" 
+FontAttributes="Bold"
+FontSize="16" 
+TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}" />
+            <Label Text="Saturday" FontAttributes="Bold" FontSize="20" 
+TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+            <CollectionView ItemsSource="{Binding SaturdayMeals}" SelectionMode="Single"
+SelectedItem="{Binding SelectedMeal, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" 
+        Stroke="{AppThemeBinding Light=#C8C8C8, Dark=#383838}" 
+        StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout Padding="10">
+                                <Label Text="{Binding MealType}"
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}"/>
+                                <Label Text="{Binding Food}" 
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                                <Label Text="{Binding Calories, StringFormat='{0} Calories'}" 
+               TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding SaturdayCalories, StringFormat='Total: {0} Calories'}" 
+                    FontAttributes="Bold"
+                    FontSize="16" 
+                    TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}" />
+                                <Label Text="Sunday" FontAttributes="Bold" FontSize="20" 
+                    TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                                <CollectionView ItemsSource="{Binding SundayMeals}" SelectionMode="Single"
+                    SelectedItem="{Binding SelectedMeal, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}" 
+        Stroke="{AppThemeBinding Light=#C8C8C8, Dark=#383838}" 
+        StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout Padding="10">
+                                <Label Text="{Binding MealType}"
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}"/>
+                                <Label Text="{Binding Food}" 
+               FontSize="18"
+               TextColor="{AppThemeBinding Light=#00A28E, Dark=#00FFB2}"/>
+                                <Label Text="{Binding Calories, StringFormat='{0} Calories'}" 
+               TextColor="{AppThemeBinding Light=#E57373, Dark=#FFA07A}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding SundayCalories, StringFormat='Total: {0} Calories'}" 
+FontAttributes="Bold"
+FontSize="16" 
+TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#FFFFFF}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

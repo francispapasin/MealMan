@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MealMan.ViewModel"
+             x:Class="MealMan.View.AddMealPage"
+             BackgroundColor="{AppThemeBinding Light=#F4F4F4, Dark=#121212}">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
+            <ImageButton Source="back.png"
+
+                    WidthRequest="50"
+                         HeightRequest="30"
+                    HorizontalOptions="Start"
+                         Margin="-10,0,0,0"
+                       Clicked="Button_Clicked_1"
+        
+                />
+            <Label Text="Select Meal Type" FontAttributes="Bold" />
+            <Picker SelectedItem="{Binding SelectedMeal.MealType, Mode=TwoWay}" Title="Select Meal Type">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Breakfast</x:String>
+                        <x:String>Lunch</x:String>
+                        <x:String>Meryenda</x:String>
+                        <x:String>Dinner</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!-- Day Picker -->
+            <Label Text="Select Day" FontAttributes="Bold" />
+            <Picker SelectedItem="{Binding SelectedMeal.Day, Mode=TwoWay}" Title="Select Day">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Monday</x:String>
+                        <x:String>Tuesday</x:String>
+                        <x:String>Wednesday</x:String>
+                        <x:String>Thursday</x:String>
+                        <x:String>Friday</x:String>
+                        <x:String>Saturday</x:String>
+                        <x:String>Sunday</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!-- Food Entry -->
+            <Label Text="Enter Food" FontAttributes="Bold" />
+            <Entry Placeholder="Food" Text="{Binding SelectedMeal.Food, Mode=TwoWay}" />
+
+            <!-- Calories Entry -->
+            <Label Text="Enter Calories" FontAttributes="Bold" />
+            <Entry Placeholder="Calories" Text="{Binding SelectedMeal.Calories, Mode=TwoWay}" Keyboard="Numeric" />
+
+            <!-- Add Meal Button -->
+            <Button Text="Add Meal" Command="{Binding AddMealCommand}" 
+                    BackgroundColor="#28a745" TextColor="White" Padding="15"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
